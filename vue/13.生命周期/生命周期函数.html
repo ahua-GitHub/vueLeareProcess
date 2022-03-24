@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue2.6.0.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <h2 >{{num}}</h2>
+        <button @click="num++">点我n+1</button>
+        <button @click="des">点我销毁vm</button>
+    </div>
+    <script>
+    new Vue({
+        el:"#root",
+        data() {
+            return{
+                num:1
+            }
+        },
+        methods: {
+            des(){
+                this.$destroy()
+            }
+        },
+        beforeCreate() {
+            console.log("beforeCreate")
+        },
+        created() {
+            console.log("created")
+        },
+        beforeMount() {
+            console.log("beforeMount")
+        },
+        mounted() {
+            console.log("mounted")
+        },
+        beforeUpdate() {
+            console.log("beforeUpdate")
+        },
+        updated() {
+            console.log("updated")
+        },
+        beforeDestroy() {
+            console.log("beforeDestroy")  
+        },
+        destroyed() {
+            console.log("destroyed")
+        },
+    })
+    </script>
+    
+</body>
+</html>

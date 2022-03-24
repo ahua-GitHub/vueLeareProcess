@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        let person = {
+            name:'阿花',
+            age:'16'
+        }
+        // 模拟vue3实现相应式person:原数据 p:代理数据
+        let  p = new Proxy(person,{
+            // 查找某个数据时调用
+            // target:原数据  propName:读取的数据
+            get(target,propName){
+                console.log(`我读取了${propName}属性`)
+                return Reflect.get(target,propName)
+            },
+            // 修改或者追加某个属性时调用
+            set(target,propName,value){
+                console.log(`我修改了${propName}属性`)
+                Reflect.set(target,propName,value)
+            },
+            // 删除某个属性时调用
+            deleteProperty(target,propName){
+                console.log(`我删除了${propName}属性`)
+                return Reflect.defineProperty(target,propName)
+            }
+
+        })
+
+        // 这样不写get,set实现的是p和person属性之间的代理,一个属性改动另一个也会改动,但不叫响应式,没有相应的反馈
+        // let p = new Proxy(peron,{})
+    </script>
+</body>
+</html>

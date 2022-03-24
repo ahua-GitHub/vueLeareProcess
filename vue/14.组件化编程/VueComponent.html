@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue2.6.0.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <band></band>
+        <hr>
+        <hello></hello>
+    </div>
+    <script>
+
+    // 创建band组件
+    const band = Vue.extend({
+        template: `
+            <div>
+                <h2>乐队名称:{{name}}</h2>
+                <h2>代表作:{{main}}</h2>
+                <button @click="showThis">输出组件this</button>
+            </div>            
+        `,
+        data(){
+            return{
+                name:'回春丹',
+                main:'艾米莉'
+            }
+        },
+        methods: {
+            showThis(){
+                console.log('showThis',this)
+            } 
+        }
+    })
+    const hello = Vue.extend({
+        template: `
+            <div>
+                <h2>{{message}}</h2>
+            </div>            
+        `,
+        data(){
+            return{
+                message:"你好，vue！"
+            }
+        }
+    })
+    console.log(band)
+    console.log(hello)
+    new Vue({
+            el:"#root",
+            components:{
+               band,
+               hello
+            }
+    })
+    </script>
+    
+    
+</body>
+</html>

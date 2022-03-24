@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue2.6.0.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <form @submit.prevent ="demo">
+            <!-- v-model.trim忽略输入框中首尾的空格 -->
+            账号：<input type="text" v-model.trim = "userInfo.account"><br><br>
+            密码：<input type="password" v-model = "userInfo.passward"><br><br>
+            <!--type="number"指定输入框中的输入类型，v-model.number指定vue只识别输入的数字类型的数据 -->
+            年龄：<input type="number" v-model.number = "userInfo.age"><br><br>
+            性别：
+            男<input type="radio" name="sex" v-model="userInfo.sex" values="male"><br><br>
+            女<input type="radio" name="sex" v-model="userInfo.sex" values="female"><br><br>
+            爱好：
+            抽烟<input type="checkbox" v-model="userInfo.hobby" value="smoking">
+            喝酒<input type="checkbox" v-model="userInfo.hobby" value="drunk">
+            烫头<input type="checkbox" v-model="userInfo.hobby" value="head"><br><br>
+            当前地区
+            <select v-model="userInfo.city">
+                <option>请选择地区</option>
+                <option value="beijin">北京</option>
+                <option value="shanghai">上海</option>
+                <option value="hangzhou">杭州</option>
+                <option value="nanjing">南京</option>
+                <option value="shenzhen">深圳</option>
+            </select>
+            个人简介：
+            <!--v-model.lazy 指定失去焦点才会更新一次数据  -->
+            <textarea v-model.lazy="userInfo.person" cols="30" rows="10"></textarea>
+            <input type="checkbox" v-model="userInfo.agree">同意<a href="https://blog.csdn.net/aaahuahua">《本协议》</a>
+            <button id="demo">提交</button>
+        </form>        
+    </div>
+    <script>
+        const app = new Vue({
+            el:'#root',
+            data:{
+                userInfo:{
+                    account : '',
+                    passward : '',
+                    age : '',
+                    sex : '',
+                    hobby : [],
+                    city : 'hangzhou',
+                    agree : ''
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>

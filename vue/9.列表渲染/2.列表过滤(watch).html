@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引用vue后全局就会多一个vue的对象 -->
+    <script src="../vue2.6.0.js"></script>
+    <!-- <script src="../vue.global.js"></script> -->
+    <title>初识vue</title>
+</head>
+<body>
+    <div id="root">
+        <input type="text" placeholder="请输入查询内容" v-model="seachWord">
+        <ul>
+            <li v-for="(p,index) in resultList" :key="index">{{p.name}}-{{p.age}}-{{p.id}}</li>
+        </ul>
+    </div>
+
+    <script>
+        const app = new Vue({
+            el:'#root',
+            data:{
+                personsList:[
+                    {id:01,name:"张三丰",age:14},
+                    {id:02,name:"李四丰",age:15},
+                    {id:03,name:"李六",age:16},
+                    {id:04,name:"张六",age:16}
+                ],
+                seachWord:'',
+                resultList:[]
+            },
+            watch:{
+                seachWord:{
+// 立即执行一次，newValue为空串，而每个字符串中都含空字符，即p.name.indexOf('') === 0，所以立即执行后页面上能直接显示出内容列表
+                    immediate:true,
+                    handler(newValue){
+                        this.resultList = this.personsList.filter((p)=>{
+                        return p.name.indexOf(newValue) !== -1
+                    })
+                    }
+                    
+                }
+            }
+        })   
+             
+    </script>
+    
+</body>
+</html>

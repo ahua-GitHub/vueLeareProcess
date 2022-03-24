@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue2.6.0.js"></script>
+    <script src="../dayjs.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+<div id="root">
+    <!-- 先读取管道符前的参数，然后传入到timeFormater中，执行完成后将返回值给timeFormater,再替换掉{{}}里面的插值语法 -->
+    <h3>现在是：{{time | timeFormater}}</h3>
+    <!-- 接收参数时，无论有没有传入管道符|前面的参数，Vue都会其作为第一个参数传入 -->
+    <h3>现在是：{{time | timeFormater('YYYY_MM_DD')}}</h3>
+    <!-- 过滤器串联时，先读取管道符前的参数，然后传入到timeFormater中，执行完成后将返回值给下一个过滤器作为参数，再将返回值返回替换插值语法 -->
+    <h3>现在是：{{time | timeFormater('YYYY_MM_DD')|mySlice}} </h3>
+    <!-- 过滤器还可以用在v-bind中 -->
+    <h3 :ahua="message | mySlice">v-bind和过滤器</h3>
+</div>
+    <script>
+    // 全局过滤器
+    // Vue.filter('timeFormater',function(value,str='YYYY年MM月DD日 HH:mm:ss'){
+    //     return dayjs(value).format(str)
+    // })
+    const app = new Vue({
+        data() {
+            return {
+                time:1636618923735,
+                message:"你好，阿花"
+            }
+        },
+        // 局部过滤器，写在定义好的vue实例中，其他组件中不能复用
+        // 过滤器本质是函数，可以对数据进行加工,
+        filters:{
+            // es6的形参默认值，不传入的时候默认是'YYYY年MM月DD日 HH:mm:ss'
+            timeFormater(value,str='YYYY年MM月DD日 HH:mm:ss'){
+                return dayjs(value).format(str)
+            },
+            mySlice(years){
+                return years.slice(0,4)
+            }
+        }
+    })
+    app.$mount('#root')
+    </script>
+    
+</body>
+</html>

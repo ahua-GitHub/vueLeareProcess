@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue2.6.0.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <app></app>
+    </div>
+    <script>
+
+    // 创建TeamNum组件
+    const team = Vue.extend({
+        template : `
+            <div>
+                <h2>乐队人数:{{num}}</h2>
+                <h2>新专:{{album}}</h2>
+            </div>            
+        `,
+        data(){
+            return{
+                num:3,
+                album:'耳鬼出风'
+            }
+        }
+    })
+    // 创建band组件
+    const band = Vue.extend({
+        template: `
+            <div>
+                <h2>乐队名称:{{name}}</h2>
+                <h2>代表作:{{main}}</h2>
+                <team></team>
+            </div>            
+        `,
+        data(){
+            return{
+                name:'回春丹',
+                main:'艾米莉'
+            }
+        },
+        components:{
+            team
+        }
+    })
+
+    // 定义app组件，管理所有组件
+    const app = Vue.extend({
+        template:`
+            <div>
+                <band></band>    
+            </div>
+        `,
+        components:{
+            // team由band管理
+            band
+        }
+    })
+
+    new Vue({
+            el:"#root",
+            components:{
+                app
+            }
+        })
+    </script>
+    
+    
+</body>
+</html>

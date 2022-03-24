@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue2.6.0.js"></script>
+    <title>Document</title>
+</head>
+<body>
+        <div id="root">
+            <band></band>
+        </div>
+    <script>
+
+    //在Vue原型对象上添加一个x属性
+    Vue.prototype.x = 1;
+
+    // 创建band组件
+    const band = Vue.extend({
+        template: `
+            <div>
+                <h2>乐队名称:{{name}}</h2>
+                <h2>代表作:{{main}}</h2>
+                <button @click="showThisX">输出组件this</button>
+            </div>            
+        `,
+        data(){
+            return{
+                name:'回春丹',
+                main:'艾米莉'
+            }
+        },
+        methods: {
+            showThisX(){
+                console.log('showThisX',this.x)
+            } 
+        }
+    })
+
+    new Vue({
+            el:"#root",
+            components:{
+               band
+            }
+    })
+    </script>
+    
+    
+</body>
+</html>

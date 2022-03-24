@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let person = {
+            name:'阿花',
+            age:'18'
+        }
+
+        let p = {}
+        // vue2 中的实现方法  不具备增加和删除的功能
+        Object.defineProperty(p,'name',{
+            // 读取name时返回
+            get(){
+                return person.name
+            },
+            // 更改name时返回
+            set(value){
+                console.log('我修改了name属性')
+                person.name = value
+            }   
+         })
+        Object.defineProperty(p,'age',{
+            // 读取name时返回
+            get(){
+                return person.age
+            },
+            // 更改name时返回
+            set(value){
+                console.log('我修改了name属性')
+                person.age = value
+            }   
+         })
+    </script>
+    
+</body>
+</html>

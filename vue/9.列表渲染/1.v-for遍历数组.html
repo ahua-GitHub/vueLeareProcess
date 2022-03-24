@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引用vue后全局就会多一个vue的对象 -->
+    <script src="../vue.js"></script>
+    <!-- <script src="../vue.global.js"></script> -->
+    <title>初识vue</title>
+</head>
+<body>
+    <div id="root">
+        <ul>
+            <li v-for="(p,index) in personsList" :key ="index">{{p.name}}-{{p.age}}</li>
+            <li v-for="(value,key) in bandList" :key ="key">{{key}}-{{value}}</li>
+            <li v-for="(char,index) in charList" :key ="key">{{char}}-{{index}}</li>
+        </ul>
+    </div>
+
+    <script>
+        const app = new Vue({
+            el:'#root',
+            data:{
+                personsList:[
+                    {name:"张三",age:14},
+                    {name:"李四",age:15},
+                    {name:"赵六",age:16}
+                ],
+                bandList:{
+                    name:"回春丹",
+                    lendSinger:"刘西蒙",
+                    magnumOpus:"正义"
+        
+                },
+                charList:"ahua"
+            }   
+        })   
+             
+    </script>
+    
+</body>
+</html>

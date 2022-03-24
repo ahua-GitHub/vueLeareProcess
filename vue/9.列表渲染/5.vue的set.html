@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引用vue后全局就会多一个vue的对象 -->
+    <script src="../vue2.6.0.js"></script>
+    <!-- <script src="../vue.global.js"></script> -->
+    <title>初识vue</title>
+</head>
+<body>
+    <div id="root">
+        <button @click="addAge">点击添加一个年龄</button>
+        <button @click="addHeigh">点击添加一个身高</button>
+        <h1>{{personsList.age}}</h1>
+        <h1>{{personsList.heigh}}</h1>
+    </div>
+
+<script>
+    const app = new Vue({
+        el:'#root',
+        data:{
+            personsList:{
+                name:"阿花",
+                sex:"男"
+            }
+        },
+        methods:{
+            addAge(){
+                // Vue的set方法
+                Vue.set(this.personsList,'age',18) 
+            },
+            addHeigh(){
+                // Vue实例的set方法
+                this.$set(this.personsList,'heigh',180)
+            }
+        }
+    })   
+             
+</script>
+    
+</body>
+</html>

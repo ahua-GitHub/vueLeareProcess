@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+
+        <input type="text" v-model:value="firstName"><br><br>
+        <input type="text" v-model:value="lastName"><br>
+        <h1>{{showName}}</h1>
+    </div>
+    <script>
+        const app = new Vue({
+            el:"#root",
+            data:{
+                    firstName: '阿',
+                    lastName: '花'                
+            },
+            computed:{
+                showName:{
+            // 读取showName时，就会调用一次get方法，返回值就是showName的值，然后将showName挂载到Vue实例上
+            // get的调用时机 1.初次调用showName时  2.showName依赖的数据发生变化时
+            // 也就是说computed会缓存showName的值，而不是每次都调用get方法重新获取
+                    get(){
+                        // 这里的this指向的是Vue实例
+                        // console.log(this)
+                        return this.firstName +" "+ this.lastName
+                    },
+                    // set的参数是修改后的值
+                    set(value){
+                        // console.log('set修改后的showName：'+value)
+                        const arr = value.split('')
+                        this.firstName = arr[0]
+                        this.lastName = arr[1]
+                    }
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>

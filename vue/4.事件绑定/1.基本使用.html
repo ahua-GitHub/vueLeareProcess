@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>数据绑定</title>
+</head>
+<body>
+    <div id="root">
+        <h1>hello,{{message}}</h1>
+        <!-- 绑定点击事件-->
+        <button v-on:click="showAlert">点击我</button>
+		<!-- 如果传入了参数，就会替代event，如果还需要使用event需要用$event进行占位-->
+        <button v-on:click="showAlert1(10086,$event)">点击我1</button>
+    </div>
+    <script>
+        const app = new Vue({
+            el:'#root',
+            data:{
+                message:'ahua',
+            },
+            //点击事件的回调
+            methods:{
+                showAlert(event){
+                //如果传入了event，这里的event表示的也是事件对象
+                    console.log(event.target.innerText)
+                    //这里的this指向的是Vue实例
+                    console.log(this)
+                    alert('ahua,你好')
+                },
+                showAlert1(num,event){
+             	    console.log(event,num)
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue2.6.0.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <hi></hi>
+        <hr>
+        <h3>{{message}}</h3>
+        <hr>
+        <band></band>
+        <hr>
+        <team></team>
+        <hr>
+        <team></team>
+    </div>
+    <script>
+
+        // 创建band组件
+        const band = Vue.extend({
+            template: `
+                <div>
+                    <h2>乐队名称:{{name}}</h2>
+                    <h2>代表作:{{main}}</h2>
+                </div>            
+            `,
+            data(){
+                return{
+                    name:'回春丹',
+                    main:'艾米莉'
+                }
+            }
+        })
+        // 创建team组件
+        const team = Vue.extend({
+            template : `
+                <div>
+                    <h2>team名称:{{name}}</h2>
+                    <h2>代表:{{main}}</h2>
+                </div>            
+            `,
+            data(){
+                return{
+                    name:'tripper',
+                    main:'skater'
+                }
+            }
+        })
+
+        const hi = Vue.extend({
+            template : `
+                <div>
+                    <h2>{{message}}</h2>
+                </div>            
+            `,
+            data(){
+                return{
+                    message:"新年快乐"
+                }
+            }
+        })
+
+        Vue.component('hi',hi)
+       new Vue({
+            el:"#root",
+            data:{
+                message:"你好，阿花"
+            },
+            components:{
+                band,
+                // es6简写形式为 band
+                team
+            }
+        })
+// band组件简写形式
+    // const band = {
+    //     template: `
+    //         <div>
+    //             <h2>乐队名称:{{name}}</h2>
+    //             <h2>代表作:{{main}}</h2>
+    //         </div>            
+    //     `,
+    //     data(){
+    //         return{
+    //             name:'回春丹',
+    //             main:'艾米莉'
+    //         }
+    //     }
+    // }
+    </script>
+    
+    
+</body>
+</html>

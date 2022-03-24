@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引用vue后全局就会多一个vue的对象 -->
+    <script src="../vue2.6.0.js"></script>
+    <!-- <script src="../vue.global.js"></script> -->
+    <title>初识vue</title>
+</head>
+<body>
+    <div id="root">
+        <input type="text" placeholder="请输入查询内容" v-model="seachWord">
+        <button @click="sortType = 2">年龄升序</button>
+        <button @click="sortType = 1">年龄降序</button>
+        <button @click="sortType = 0">原顺序</button>
+        <ul>
+            <li v-for="p in resultList" :key="p.id">{{p.name}}-{{p.age}}   </li>
+        </ul>
+    </div>
+
+<script>
+    const app = new Vue({
+        el:'#root',
+        data:{
+            personsList:[
+                {id:01,name:"张三丰",age:19},
+                {id:02,name:"李四丰",age:15},
+                {id:03,name:"李六",age:20},
+                {id:04,name:"张六",age:16}
+            ],
+            seachWord:'',
+            sortType:0  //0代表原顺序，1代表降序，2代表升序（自定义的，使用其他内容做代表也行）
+        },
+        computed:{
+            resultList(){
+    // 计算属性一开始就会调用一次，之后依赖的值发生改变都会调用一次
+                const arr =  this.personsList.filter((p)=>{
+                    return p.name.indexOf(this.seachWord) !== -1
+                    // 0转换为布尔值是false
+                })
+                if(this.sortType){
+                        arr.sort((a,b)=>{
+                            return this.sortType === 1 ? b.age-a.age : a.age-b.age
+                        })
+                    }
+                return arr
+            }
+        }
+    })   
+             
+</script>
+    
+</body>
+</html>

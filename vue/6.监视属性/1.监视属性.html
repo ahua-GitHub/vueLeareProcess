@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引用vue后全局就会多一个vue的对象 -->
+    <script src="../vue.js"></script>
+    <!-- <script src="../vue.global.js"></script> -->
+    <title>初识vue</title>
+</head>
+<body>
+    <div id="root">
+        <h1>{{name}},你好</h1>
+        <button @click="changeName">切换姓名</button>
+    </div>
+
+    <script>
+        const app = new Vue({
+            el:'#root',
+            data:{
+                info:true
+            },
+            computed: {
+                name(){
+                    return this.info ? '阿花' : 'ahua'
+                }
+            },
+            methods: {
+                changeName(){  
+                    this.info = !this.info
+                } 
+            },
+
+        })   
+             
+    </script>
+    
+</body>
+</html>

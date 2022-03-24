@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引用vue后全局就会多一个vue的对象 -->
+    <script src="../vue.js"></script>
+    <!-- <script src="../vue.global.js"></script> -->
+    <title>初识vue</title>
+</head>
+<body>
+    <div id="root">
+
+        <input type="text" v-model:value="firstName"><br><br>
+        <input type="text" v-model:value="lastName"><br>
+        <h1>{{showName}}</h1>
+    </div>
+
+    <script>
+        const app = new Vue({
+            el:'#root',
+            data:{
+                firstName:'刘',
+                lastName:'宝',
+                showName:'刘宝'
+
+            },
+            watch:{
+                // 监测info属性
+                firstName(newValue){
+                    this.showName = newValue + this.lastName
+                },
+                lastName(newValue){
+                    this.showName = this.firstName + newValue
+                }            
+            }
+
+        })   
+             
+    </script>
+    
+</body>
+</html>

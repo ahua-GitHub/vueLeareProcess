@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue2.6.0.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <h2>当前的值是：<span v-text="num"></span></h2>
+        <h2>乘以10之后的值是：<span v-big="num"></span></h2>
+        <h2>乘以100之后的值是：<span v-big-num="num"></span></h2>
+        <button @click="num++">点我num＋1</button>
+        <input type="text" v-fbind:value="num">
+    </div>
+<script>
+    // 自定义指令也支持全局写法,类似全局过滤器
+    Vue.directive('fbind',{
+        bind(element,binding){
+            element.value = binding.value
+        },
+        inserted(element,binding){
+            element.focus()
+        },
+        update(element,binding) {
+            element.value = binding.value
+        }
+    })
+    const app = new Vue({
+        el:'#root',
+        data() {
+            return {
+                num:1
+            }
+        },
+        // vue中只有自定义指令里面的this指向的不是vue实例,指向window
+        directives:{
+            
+            // 函数写法
+            // 自定义函数指令调用时机
+            //1.当指令与元素成功绑定时调用  2.指令所在模板被重新解析时调用
+            
+            //第一个参数是当前绑定的真实dom元素  第二个参数是将元素和参数进行绑定后返回的结果对象
+            big(element,binding){
+                element.innerText = binding.value*10
+            },
+
+            // 对象写法
+            // 这三个函数是vue定义好的，不支持改名，不然vue没法识别
+            fbind:{
+                // 指令和元素绑定成功后调用(未渲染到页面)
+                bind(element,binding){
+                    element.value = binding.value
+                },
+                // 指令所在元素被插入到页面时调用
+                inserted(element,binding){
+                    // 如果在指令和元素绑定时就获取焦点,这时模板刚被vue解析,还没有渲染到页面上,根本没有这个元素,自然获取焦点失败
+                    element.focus()
+                },
+                // 指令所在模板被重新解析时
+                update(element,binding) {
+                    element.value = binding.value
+                }
+            },
+            // vue不支持小驼峰命名法,当多个单词组合在一起的时候建议用横线连接,这时不能简写省略'' 
+            'big-num'(element,binding){
+                element.innerText = binding.value*100
+            }
+            
+        }
+    })
+</script>
+</body>
+</html>

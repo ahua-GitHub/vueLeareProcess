@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>指令语法</title>
+</head>
+<body>
+    <div id="root">
+        <h1>指令语法</h1>
+        <!-- v-bind:href="url" 表示将js表达式url执行的结果绑定到href上 -->
+        <a v-bind:href="url">点击跳转阿花的博客</a>
+        <a :href="jump.url">点击跳转百度</a>
+    </div>
+    <script>
+        const app = new Vue({
+            el:'#root',
+            data:{
+                message:'ahua',
+                url:'https://blog.csdn.net/aaahuahua',
+                jump:{
+                	    url:'http://www.baidu.com'
+                	}
+            }
+        })
+    </script>
+</body>
+</html>

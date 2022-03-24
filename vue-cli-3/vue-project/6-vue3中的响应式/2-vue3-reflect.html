@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        let obj = {a:1,b:2}
+
+        // 使用Object会报错
+        // Object.defineProperty(obj,'c',{
+        //     get(){
+        //         return 3
+        //     }
+        // })
+        // Object.defineProperty(obj,'c',{
+        //     get(){
+        //         return 3
+        //     }
+        // })
+        // console.log('-----------')
+
+
+        // 使用Reflect不会,后面的代码可以继续执行  一般用于封装框架的时候,不影响后面模块代码的执行
+        const x = Reflect.defineProperty(obj,'c',{
+            get(){
+                return 3
+            }
+        })
+        const y = Reflect.defineProperty(obj,'c',{
+            get(){
+                return 3
+            }
+        })
+        // 他们会有一个返回值记录这段代码是否成功执行
+        console.log(x,y)
+        console.log('~~~~~~~~~~~~~')
+
+    </script>
+</body>
+</html>

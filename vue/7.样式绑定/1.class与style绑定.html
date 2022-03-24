@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引用vue后全局就会多一个vue的对象 -->
+    <script src="../vue.js"></script>
+    <!-- <script src="../vue.global.js"></script> -->
+    <title>初识vue</title>
+    <style>
+        #root{
+            text-align: center;
+            line-height:200px;
+            height: 200px;
+            width: 200px;
+            font-size: 20px;
+        }
+        .blue{
+            background-color:blue;
+        }
+        .text{
+            font-weight: 900;
+        }
+        .border{
+            border-radius: 50%;
+        }
+        .red{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<!-- 字符串写法，适用于样式类名不确定，需要动态指定 -->
+    <!-- <div id="root" class="boder" :class="color"   @click = "changeColor">
+        {{message}}
+    </div> -->
+
+    <!-- 数组写法 -->
+    <!-- <div id="root"  :class="arr"   @click = "changeColor">
+        {{message}}
+    </div> -->
+<!-- 对象写法 -->
+     <div id="root"  :class="arr"   @click = "changeColor">
+        {{message}}
+    </div>
+    <script>
+        const app = new Vue({
+            el:'#root',
+            data:{
+                message:"阿花",
+                color:'blue',
+                arr:['text','border','red']
+            },
+            methods: {
+                changeColor(){
+                    this.arr.shift()
+                }
+            },
+        })            
+    </script>
+    
+</body>
+</html>

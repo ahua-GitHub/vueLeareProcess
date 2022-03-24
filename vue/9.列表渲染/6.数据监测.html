@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引用vue后全局就会多一个vue的对象 -->
+    <script src="../vue2.6.0.js"></script>
+    <!-- <script src="../vue.global.js"></script> -->
+    <title>初识vue</title>
+</head>
+<body>
+    <div id="root">
+        <h1>乐队信息</h1>
+        <button @click="band.num++">成员加一</button>
+        <button @click="addStand">添加代表作</button>
+        <button @click="band.stand='艾米莉' ">修改代表作</button>
+        <button @click.once="addBand">添加一个乐队</button>
+        <button @click.once="updateBand">修改乐队为康姆士</button>
+        <button @click.once="addHobby">添加一个爱好</button>
+        <button @click.once="updateHobby">修改爱好</button>
+        <h3>姓名：{{band.name}}</h3>
+        <h3>成员：{{band.num}}</h3>
+        <h3 v-show="band.stand">代表作：{{band.stand}}</h3>
+        <ul>
+            <li v-for="(b,index) in band.hobby" :key="index">{{b}}</li>
+        </ul>
+        <h3>其他乐队：</h3>
+        <ul>
+            <li v-for="(o,index) in band.other" :key="index">
+                {{o.name}}--{{o.num}}
+            </li>
+        </ul>
+    </div>
+
+<script>
+    const app = new Vue({
+        el:'#root',
+        data:{
+            band:{
+                name:"回春丹",
+                num:3,
+                hobby:['抽烟','喝酒','烫头'],
+                other:[
+                    {name:'sgbb',num:4},
+                    {name:'四驱兄弟',num:2}
+                ]
+            }
+        },
+        methods: {
+            addStand(){
+                Vue.set(this.band,'stand','正义')
+            },
+            addBand(){
+                this.band.other.unshift({name:'夏日入侵企划',num:4})
+            },
+            updateBand(){
+                this.band.other[0].name = '康姆士'
+            },
+            addHobby(){
+                this.band.hobby.push('唱歌')
+            },
+            updateHobby(){
+                // this.band.hobby.splice(0,1,'打游戏')
+                this.$set(this.band.hobby,0,'打游戏')
+            }
+            
+        }
+    })   
+             
+</script>
+    
+</body>
+</html>

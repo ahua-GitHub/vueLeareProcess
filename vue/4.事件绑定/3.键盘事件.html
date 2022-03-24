@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>数据绑定</title>
+</head>
+
+<body>
+    <div id="root">
+        <input type="text" placeholder="按下回车输出内容" @keyup.huiche="showInfo" >
+    </div>
+    <script>
+
+        Vue.config.keyCodes.huiche = 13
+        const app = new Vue({
+            el:'#root',           
+            methods:{
+             showInfo(e){
+                    console.log(e.target.value)
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>

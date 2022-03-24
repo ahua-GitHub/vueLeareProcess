@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引用vue后全局就会多一个vue的对象 -->
+    <script src="../vue.js"></script>
+    <!-- <script src="../vue.global.js"></script> -->
+    <title>初识vue</title>
+</head>
+<body>
+    <div id="root">
+        <!-- <h1 v-show="info">{{message}},你好</h1>
+        <h1 v-show="1===3">{{message}},你好</h1> -->
+        <h1 v-if="false">早上好</h1>
+
+    </div>
+
+    <script>
+        const app = new Vue({
+            el:'#root',
+            data:{
+                info:false,
+                message:'阿花',               
+            }   
+        })   
+             
+    </script>
+    
+</body>
+</html>

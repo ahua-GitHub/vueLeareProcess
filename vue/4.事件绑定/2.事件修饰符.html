@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>数据绑定</title>
+    <style>
+        div {
+            height: 50px;
+            margin-top:20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <!-- prevent 阻止默认事件 -->
+        <a href="https://blog.csdn.net/aaahuahua" @click.prevent="showInfo" >点我跳转到阿花的博客</a>
+        <!--stop 阻止事件冒泡 -->
+        <div @click= "showInfo2">
+            <button @click.stop = "showInfo1">点击我</button>
+        </div>
+        <!-- once 只触发一次 -->
+        <div>
+            <button @click.once= "showInfo3">只触发一次</button>
+        </div>
+    </div>
+    <script>
+        const app = new Vue({
+            el:'#root',
+            data:{
+                message:'ahua',
+            },
+            //点击事件的回调
+            methods:{
+                showInfo(){
+                    alert('确认跳转到阿花的博客吗')
+                },
+                showInfo1(){
+                    alert('阻止事件冒泡')
+                },
+                showInfo2(){
+                    alert('事件冒泡')
+                },
+                showInfo3(){
+                    alert('触发一次')
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>
